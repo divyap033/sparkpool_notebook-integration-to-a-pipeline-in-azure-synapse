@@ -1,0 +1,215 @@
+{
+	"name": "Notebook 1",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "spark001",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "afbcf0c9-f9e7-4419-8932-86f284abfc78"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1",
+				"state": {
+					"af296af7-3bcb-4f38-9816-a8387337381a": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "1",
+										"1": "Science",
+										"2": "15.99"
+									},
+									{
+										"0": "2",
+										"1": "Maths",
+										"2": "20.99"
+									},
+									{
+										"0": "3",
+										"1": "English",
+										"2": "10.99"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "ID",
+										"type": "bigint"
+									},
+									{
+										"key": "1",
+										"name": "Subject",
+										"type": "string"
+									},
+									{
+										"key": "2",
+										"name": "Price",
+										"type": "double"
+									}
+								],
+								"truncated": false
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"1"
+									],
+									"seriesFieldKeys": [
+										"0"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					},
+					"422548c2-df11-47ef-a41e-641980e9d070": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "2",
+										"1": "Maths",
+										"2": "20.99"
+									},
+									{
+										"0": "1",
+										"1": "Science",
+										"2": "15.99"
+									},
+									{
+										"0": "3",
+										"1": "English",
+										"2": "10.99"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "ID",
+										"type": "bigint"
+									},
+									{
+										"key": "1",
+										"name": "Subject",
+										"type": "string"
+									},
+									{
+										"key": "2",
+										"name": "Price",
+										"type": "double"
+									}
+								],
+								"truncated": false
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"1"
+									],
+									"seriesFieldKeys": [
+										"0"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					}
+				}
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/90200b4f-344c-4273-8e85-bc05fb62f6f6/resourceGroups/trialsdemo001/providers/Microsoft.Synapse/workspaces/synapsepython/bigDataPools/spark001",
+				"name": "spark001",
+				"type": "Spark",
+				"endpoint": "https://synapsepython.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/spark001",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "3.2",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"collapsed": false
+				},
+				"source": [
+					"courses=[(1,'Science',15.99),(2, 'Maths',20.99),(3,'English',10.99)]\r\n",
+					"df =spark.createDataFrame(courses,['ID','Subject','Price'])\r\n",
+					"df.show()\r\n",
+					"display (df)"
+				],
+				"execution_count": 12
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"from pyspark.sql.functions import desc\r\n",
+					"from pyspark.sql.functions import col\r\n",
+					"sortdf=df.sort(col('Price').desc())\r\n",
+					"display(sortdf)"
+				],
+				"execution_count": 13
+			}
+		]
+	}
+}
